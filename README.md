@@ -20,7 +20,7 @@
 ### 配置步骤
 #### 第一步：配置manifest中的占位符
 ```
- <meta-data
+<meta-data
             android:name="server_mode"
             android:value="${SERVER_MODE}"/>
 ```
@@ -80,8 +80,7 @@ signingConfigs {
             keyPassword
         }
 
-    }
-      
+    }      
  //读取签名配置文件,为保证安全配置文件可放在本地磁盘中
 def getSigningProperties() {
 
