@@ -147,6 +147,19 @@ def  buildapkName(){
      }
   }
 ```
+#### 附命令行打包
+```
+//oppo渠道下的正式环境
+gradlew assembleoppoRelease
+//oppo渠道下的测试环境
+gradlew assembleoppo_test
+//全渠道正式包
+gradlew assembleRelease
+```
+
+
+至此如果再需要打不同的环境安装包只需要一行命令即可完成
+
 ##### 全文纯手工编写，如果您感觉对您有帮助请动动小手点个star哦！如果有任何疑问或者意见可在Issues中留言<br>
 https://github.com/sky8650/ChangeEnvironment
 
