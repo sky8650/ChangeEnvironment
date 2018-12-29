@@ -1,0 +1,125 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.environment.xiaolei.environment"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    signingConfigs {
+        release {
+            storeFile
+            storePassword
+            keyAlias
+            keyPassword
+        }
+
+    }
+
+
+    buildTypes {
+        release {
+            debuggable false//是否调试模式
+            signingConfig signingConfigs.release//签名配置
+            zipAlignEnabled false//是否压缩
+            minifyEnabled false//是否混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [SERVER_MODE: "RELEASE"]//mainfest的占位符
+            buildapkName()
+        }
+
+        _test {
+            debuggable true//是否调试模式
+            signingConfig signingConfigs.release//签名配置
+            zipAlignEnabled false//是否压缩
+            minifyEnabled false//是否混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [SERVER_MODE: "TEST"]//mainfest的占位符
+            buildapkName()
+        }
+    }
+
+
+    //多渠道配置
+    productFlavors {
+        _360shouzhu {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
+        }
+        ali {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "ali"]
+        }
+        oppo {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "oppo"]
+        }
+        lianxiang {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "lianxiang"]
+        }
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+
+    }
+  //  productFlavors.all { flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name] }
+    flavorDimensions "default"
+    getSigningProperties()
+}
+
+
+//读取签名配置文件
+def getSigningProperties() {
+
+    def propFile = file('signing.properties')
+    if (propFile.canRead()) {
+        def Properties props = new Properties()
+        props.load(new FileInputStream(propFile))
+        if (props != null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+                props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+            android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+            android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+            android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+            android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+
+        } else {
+            println 'signing.properties found but some entries are missing'
+            android.buildTypes.release.signingConfig = null
+        }
+    } else {
+        println 'signing.properties not found'
+        android.buildTypes.release.signingConfig = null
+    }
+}
+
+
+//生成文件的名称
+def  buildapkName(){
+  android.applicationVariants.all { variant ->
+       variant.outputs.all { output ->
+           if (outputFile != null && outputFile.name.endsWith('.apk')) {
+               def fileName = "evn_${variant.productFlavors[0].name}_${variant.buildType.name}.apk"
+               outputFileName = new File(fileName)
+           }
+       }
+     }
+  }
+
+
+
+
+
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
