@@ -16,3 +16,11 @@
 * 配置并读取签名文件信息
 * 通过代码读取环境信息并进行判断
 * 输出当前渠道环境下的apk文件
+
+### 配置步骤
+#### 第一步配置manifest中的占位符
+```
+ <meta-data
+            android:name="server_mode"
+            android:value="${SERVER_MODE}"/>
+```
