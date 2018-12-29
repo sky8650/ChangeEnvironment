@@ -157,7 +157,7 @@ gradlew assembleRelease
 //全渠道测试包
 gradlew assemble_test
 ```
-
+<img src="https://github.com/sky8650/ChangeEnvironment/blob/master/app/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181229170842.png"></img>
 
 
 至此,如果再需要打不同的环境安装包只需要一行命令即可完成
