@@ -48,7 +48,6 @@
             buildapkName()
         }
     }
-
 ```
 #### 第三步：配置多渠道打包（如果不需要多渠道打包，此步骤可省略）
 ```
@@ -69,7 +68,6 @@
 
     }
   //  productFlavors.all { flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name] }
-
 ```
 
 #### 第四步：配置并读取签名文件信息
@@ -106,9 +104,7 @@ def getSigningProperties() {
         println 'signing.properties not found'
         android.buildTypes.release.signingConfig = null
     }
-}
-    
-    
+} 
 ```
 
 #### 第五步：读取环境信息，并进行判断
@@ -151,7 +147,8 @@ def  buildapkName(){
      }
   }
 ```
-
+##### 全文纯手工编写，如果您感觉对您有帮助请动动小手点个star哦！如果有任何疑问或者意见可在Issues中留言<br>
+https://github.com/sky8650/ChangeEnvironment
 
 
 
