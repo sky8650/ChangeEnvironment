@@ -142,7 +142,7 @@ def getSigningProperties() {
 ```
 #### 第六步： 输出apk文件
 ```
-/生成文件的名称
+//生成文件的名称
 def  buildapkName(){
   android.applicationVariants.all { variant ->
        variant.outputs.all { output ->
