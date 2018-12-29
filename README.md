@@ -63,9 +63,6 @@
         oppo {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "oppo"]
         }
-        lianxiang {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "lianxiang"]
-        }
         xiaomi {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
         }
